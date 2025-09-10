@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: potato-ai-chatbot
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn web:app
+    envVars:
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: OPENROUTER_BASE_URL
+        value: https://openrouter.ai/api/v1
+      - key: OPENROUTER_MODEL
+        value: nousresearch/deephermes-3-llama-3-8b-preview:free
+      - key: FLASK_SECRET_KEY
+        generateValue: true
+      - key: LOCK_PASSWORD
+        value: 230111009115
+      - key: LOCK_ON_RELOAD
+        value: "1"
+      - key: LOCK_PERSIST
+        value: "0"
